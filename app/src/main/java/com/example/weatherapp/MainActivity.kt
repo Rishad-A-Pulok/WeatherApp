@@ -1,12 +1,18 @@
 package com.example.weatherapp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import com.example.weatherapp.viewmodels.LocationViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
 
 class MainActivity : AppCompatActivity() {
+
+    private val locViewModel: LocationViewModel by viewModels()
 
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -14,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Toast.makeText(this, "fine location granted", Toast.LENGTH_SHORT).show()
-                //detectUserLocation()
+                detectUserLocation()
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                 //Toast.makeText(this, "coarse location granted", Toast.LENGTH_SHORT).show()
-                //detectUserLocation()
+                detectUserLocation()
             } else -> {
             Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show()
         }
@@ -33,6 +39,17 @@ class MainActivity : AppCompatActivity() {
         locationPermissionRequest.launch(arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION))
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun detectUserLocation(){
+        val provider = FusedLocationProviderClient(this)
+        provider.lastLocation.addOnSuccessListener {
+            it?.let {
+                locViewModel.setNewLocation(it)
+            }
+        }
 
     }
 }
