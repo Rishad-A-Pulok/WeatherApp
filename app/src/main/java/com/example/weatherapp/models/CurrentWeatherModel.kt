@@ -5,7 +5,7 @@ data class CurrentModel(
     val clouds: Clouds,
     val cod: Int,
     val coord: Coord,
-    val dt: Int,
+    val dt: Long,
     val id: Int,
     val main: Main,
     val name: String,
@@ -36,8 +36,8 @@ data class CurrentModel(
     data class Sys(
         val country: String,
         val id: Int,
-        val sunrise: Int,
-        val sunset: Int,
+        val sunrise: Long,
+        val sunset: Long,
         val type: Int
     )
 

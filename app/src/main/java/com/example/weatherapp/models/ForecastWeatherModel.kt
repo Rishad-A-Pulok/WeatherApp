@@ -13,8 +13,8 @@ data class ForecastModel(
         val id: Int,
         val name: String,
         val population: Int,
-        val sunrise: Int,
-        val sunset: Int,
+        val sunrise: Long,
+        val sunset: Long,
         val timezone: Int
     ) {
         data class Coord(
@@ -25,7 +25,7 @@ data class ForecastModel(
 
     data class ForecastList(
         val clouds: Clouds,
-        val dt: Int,
+        val dt: Long,
         val dt_txt: String,
         val main: Main,
         val pop: Double,
