@@ -1,5 +1,7 @@
 package com.example.weatherapp.networkpackage
 
+import com.example.weatherapp.models.CurrentModel
+import com.example.weatherapp.models.ForecastModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -13,17 +15,16 @@ val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 
-/*interface WeatherServiceAPI{
+interface WeatherServiceAPI{
     @GET
-    //suspend fun getCurrentWeatherData(@Url endUrl: String) : CurrentModel
+    suspend fun getCurrentWeatherData(@Url endUrl: String) : CurrentModel
 
     @GET
-    //suspend fun getForecastWeatherData(@Url endUrl: String) : ForecastModel
-}*/
+    suspend fun getForecastWeatherData(@Url endUrl: String) : ForecastModel
+}
 
-/*
 object NetworkService {
     val weatherServiceAPI : WeatherServiceAPI by lazy {
         retrofit.create(WeatherServiceAPI::class.java)
     }
-}*/
+}
