@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import com.example.weatherapp.models.CurrentModel
@@ -27,6 +28,12 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        val adapter = ForecastAdapter()
+        val llm = LinearLayoutManager(requireActivity())
+        llm.orientation = LinearLayoutManager.HORIZONTAL
+        binding.forecastRV.layoutManager = llm
+        binding.forecastRV.adapter = adapter
+
         locViewModel.locationLiveData.observe(viewLifecycleOwner){
             /*Toast.makeText(requireActivity(), "${it.latitude},${it.longitude}", Toast.LENGTH_SHORT).show()*/
             locViewModel.locationLiveData.observe(viewLifecycleOwner){
@@ -37,6 +44,7 @@ class WeatherFragment : Fragment() {
             }
             locViewModel.forecastModelLiveData.observe(viewLifecycleOwner){
                 Log.d(ContentValues.TAG,"${it.list.size}")
+                adapter.submitList(it.list)
             }
         }
 

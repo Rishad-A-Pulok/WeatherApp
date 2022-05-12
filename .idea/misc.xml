@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SEIP_Course/Android/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.34479166666666666" />
+        <entry key="..\:/SEIP_Course/Android/WeatherApp/app/src/main/res/layout/forecast_item_row.xml" value="0.34479166666666666" />
         <entry key="..\:/SEIP_Course/Android/WeatherApp/app/src/main/res/layout/fragment_weather.xml" value="0.34479166666666666" />
       </map>
     </option>

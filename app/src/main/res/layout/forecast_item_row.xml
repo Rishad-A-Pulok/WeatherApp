@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="forecast"
+            type="com.example.weatherapp.models.ForecastModel.ForecastList" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="140dp"
+            android:layout_height="215dp">
+
+            <TextView
+                android:id="@+id/rowDateTV"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="101dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Sat 15:00"
+                app:setDateTime="@{forecast.dt}"/>
+
+            <TextView
+                android:id="@+id/rowMinMaxTV"
+                android:layout_width="84dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowLogoIV"
+                tools:text="35  / 24"
+                android:text="@{forecast.Main.temp_max +``+ forecast.Main.temp_min}"/>
+
+            <TextView
+                android:id="@+id/rowStatTV"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowMinMaxTV"
+                tools:text="Sunny"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:text="@{forecast.weather[0].description}"/>
+
+            <ImageView
+                android:id="@+id/rowLogoIV"
+                android:layout_width="55dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowDateTV"
+                tools:srcCompat="@tools:sample/avatars"
+                app:setIcon="@{forecast.weather[0].icon}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
