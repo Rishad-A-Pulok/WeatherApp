@@ -1,7 +1,11 @@
 package com.example.weatherapp.networkpackage
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Location
 import com.example.weatherapp.models.CurrentModel
 import com.example.weatherapp.models.ForecastModel
+import com.google.android.gms.location.FusedLocationProviderClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -16,6 +20,16 @@ const val icon_suffix = "@2x.png"
 
 fun  getFormattedDate(dt: Long, pattern: String) =
     SimpleDateFormat(pattern).format(Date(dt*1000))
+
+@SuppressLint("MissingPermission")
+fun getLocation(context: Context, callback: (Location) -> Unit){
+    val provider = FusedLocationProviderClient(context)
+    provider.lastLocation.addOnSuccessListener {
+        it?.let {
+            callback(it)
+        }
+    }
+}
 
 val retrofit = Retrofit.Builder()
     .baseUrl(base_url)

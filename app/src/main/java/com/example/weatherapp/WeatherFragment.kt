@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import com.example.weatherapp.models.CurrentModel
 import com.example.weatherapp.networkpackage.getFormattedDate
+import com.example.weatherapp.networkpackage.getLocation
 import com.example.weatherapp.networkpackage.icon_prefix
 import com.example.weatherapp.networkpackage.icon_suffix
 import com.example.weatherapp.viewmodels.LocationViewModel
@@ -48,6 +49,16 @@ class WeatherFragment : Fragment() {
             }
         })
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.item_location){
+            getLocation(requireContext()){
+                locViewModel.setNewLocation(it)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun convertQueryToLatLong(query: String){
         val geocoder = Geocoder(requireActivity())
         val addressList: List<Address> = geocoder.getFromLocationName(query,1)

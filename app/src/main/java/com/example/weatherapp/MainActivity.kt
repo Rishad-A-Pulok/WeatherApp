@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.example.weatherapp.networkpackage.getLocation
 import com.example.weatherapp.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 
@@ -44,13 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun detectUserLocation(){
-        val provider = FusedLocationProviderClient(this)
-        provider.lastLocation.addOnSuccessListener {
-            it?.let {
-                locViewModel.setNewLocation(it)
-            }
+        getLocation(this){
+            locViewModel.setNewLocation(it)
         }
-
     }
 }
 
