@@ -19,8 +19,9 @@
         app:contentPadding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="140dp"
-            android:layout_height="215dp">
+            android:layout_width="153dp"
+            android:layout_height="215dp"
+            android:background="@drawable/back">
 
             <TextView
                 android:id="@+id/rowDateTV"
@@ -32,35 +33,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Sat 15:00"
-                app:setDateTime="@{forecast.dt}"/>
+                app:setDateTime="@{forecast.dt}"
+                tools:text="Sat 15:00" />
 
             <TextView
                 android:id="@+id/rowMinMaxTV"
-                android:layout_width="84dp"
-                android:layout_height="31dp"
+                android:layout_width="113dp"
+                android:layout_height="27dp"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
+                android:text="@{forecast.Main.temp_max +` / `+ forecast.Main.temp_min}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rowLogoIV"
-                tools:text="35  / 24"
-                android:text="@{forecast.Main.temp_max +``+ forecast.Main.temp_min}"/>
+                tools:text="35  / 24" />
 
             <TextView
                 android:id="@+id/rowStatTV"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="130dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
+                android:text="@{forecast.weather[0].description}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rowMinMaxTV"
-                tools:text="Sunny"
-                style="@style/TextAppearance.AppCompat.Subhead"
-                android:text="@{forecast.weather[0].description}"/>
+                tools:text="Sunny" />
 
             <ImageView
                 android:id="@+id/rowLogoIV"
@@ -70,8 +71,8 @@
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rowDateTV"
-                tools:srcCompat="@tools:sample/avatars"
-                app:setIcon="@{forecast.weather[0].icon}"/>
+                app:setIcon="@{forecast.weather[0].icon}"
+                tools:srcCompat="@tools:sample/avatars" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
