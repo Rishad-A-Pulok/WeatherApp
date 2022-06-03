@@ -19,9 +19,9 @@
         app:contentPadding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="153dp"
-            android:layout_height="215dp"
-            android:background="@drawable/back">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_blue_200">
 
             <TextView
                 android:id="@+id/rowDateTV"

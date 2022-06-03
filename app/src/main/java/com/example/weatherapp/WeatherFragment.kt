@@ -96,7 +96,7 @@ class WeatherFragment : Fragment() {
                 locViewModel.fetchData(preference.getTempUnitStatus())
             }
             locViewModel.currentModelLiveData.observe(viewLifecycleOwner){
-                Log.d(ContentValues.TAG,"${it.main.temp}") 
+                Log.d(ContentValues.TAG,"${it.main.temp}")
                 setCurrentData(it)
             }
             locViewModel.forecastModelLiveData.observe(viewLifecycleOwner){
