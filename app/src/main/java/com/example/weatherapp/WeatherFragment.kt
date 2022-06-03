@@ -19,11 +19,13 @@ import com.example.weatherapp.networkpackage.getFormattedDate
 import com.example.weatherapp.networkpackage.getLocation
 import com.example.weatherapp.networkpackage.icon_prefix
 import com.example.weatherapp.networkpackage.icon_suffix
+import com.example.weatherapp.preferences.WeatherPreference
 import com.example.weatherapp.viewmodels.LocationViewModel
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
 
+    private lateinit var preference: WeatherPreference
     private val locViewModel: LocationViewModel by activityViewModels()
     private lateinit var binding: FragmentWeatherBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +82,8 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        preference = WeatherPreference(requireContext())
+        binding.tempSwitch.isChecked = preference.getTempUnitStatus()
         val adapter = ForecastAdapter()
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.HORIZONTAL
@@ -89,16 +93,20 @@ class WeatherFragment : Fragment() {
         locViewModel.locationLiveData.observe(viewLifecycleOwner){
             /*Toast.makeText(requireActivity(), "${it.latitude},${it.longitude}", Toast.LENGTH_SHORT).show()*/
             locViewModel.locationLiveData.observe(viewLifecycleOwner){
-                locViewModel.fetchData()
+                locViewModel.fetchData(preference.getTempUnitStatus())
             }
             locViewModel.currentModelLiveData.observe(viewLifecycleOwner){
-                Log.d(ContentValues.TAG,"${it.main.temp}")
+                Log.d(ContentValues.TAG,"${it.main.temp}") 
                 setCurrentData(it)
             }
             locViewModel.forecastModelLiveData.observe(viewLifecycleOwner){
                 Log.d(ContentValues.TAG,"${it.list.size}")
                 adapter.submitList(it.list)
             }
+        }
+        binding.tempSwitch.setOnCheckedChangeListener { compoundButton, isOn ->
+            preference.setTempUnitStatus(isOn)
+            locViewModel.fetchData(isOn)
         }
 
         return binding.root

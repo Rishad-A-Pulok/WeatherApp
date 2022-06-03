@@ -21,11 +21,11 @@ class LocationViewModel: ViewModel() {
         locationLiveData.value = location
     }
 
-    fun fetchData(){
+    fun fetchData(status: Boolean){
         viewModelScope.launch {
             try {
-                currentModelLiveData.value = repository.fetchCurrentWeatherData(locationLiveData.value!!)
-                forecastModelLiveData.value = repository.fetchForecastWeatherData(locationLiveData.value!!)
+                currentModelLiveData.value = repository.fetchCurrentWeatherData(locationLiveData.value!!, status)
+                forecastModelLiveData.value = repository.fetchForecastWeatherData(locationLiveData.value!!, status)
             }catch (e: Exception){
                 Log.d("LocationViewModel", e.localizedMessage)
             }
